@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Html5Qrcode } from 'html5-qrcode'; 
-import './index.css';
-
+import { Html5Qrcode } from 'html5-qrcode';
+import { Routes, Route } from 'react-router-dom'; 
+import RestaurantView from './restaurantview.jsx';
 
 // CODIGO PARA DETECTAR DISPOSITIVO MOVIL
 const useIsMobile = (breakpoint = 768) => {
@@ -211,13 +211,11 @@ function Footer() {
 
 // COMPONENTE PRINCIPAL App
 function App() {
-  const renderAppContent = () => {
-    if (window.location.pathname.startsWith('/mesa/')) {
-        return <RestaurantView />; 
-    }
-
-    return (
-        <>
+  return (
+    <div className="app-container">
+      <Routes>
+        <Route path="/" element={
+          <>
             <Navbar />
             <main>
                 <Home />
@@ -225,20 +223,13 @@ function App() {
                 <Restaurantes />
             </main>
             <Footer />
-        </>
-    );
-  };
-
-
-  return (
-    <div className="app-container">
-      <Routes>
-        <Route path="/" element={renderAppContent()} />
+          </>
+        } />
+        
         <Route path="/mesa/:idMesa" element={<RestaurantView />} /> 
       </Routes>
     </div>
   );
 }
-
 
 export default App;
