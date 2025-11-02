@@ -1,39 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 10px rgba(230, 197, 109, 0.3), 0 4px 15px rgba(0,0,0,0.1);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(230, 197, 109, 0.8), 0 8px 25px rgba(230, 197, 109, 0.2);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(230, 197, 109, 0.3), 0 4px 15px rgba(0,0,0,0.1);
-  }
-}
-
-
-
 :root {
   --brand-maroon: #6D1A1A;
   --brand-gold: #E6C56D;
-  --brand-text: #f8f8f8;
+  --brand-text: #f8f8f8; 
   --brand-dark: #222;
   --bg-light-cream: #fdfcf7;
+  --bg-app-dark: #1e1e1e;     
+  --bg-card-dark: #2a2a2a;    
+  --text-light: #f0f0f0;      
+  --text-dimmed: #888888;     
 }
-
-/* 3. Reseteo Básico */
 html {
   scroll-behavior: smooth;
 }
@@ -47,7 +24,6 @@ body, html {
   overflow-x: hidden; 
 }
 
-/* 4. Estilos del Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -101,7 +77,6 @@ body, html {
   margin: 0 auto;
 }
 
-/* ANIMACIONES DE CARGA */
 .hero-logo, .hero-tagline, .hero-subtitle, .hero-description, .hero-cta-button {
   opacity: 0;
   animation-name: fadeUp;
@@ -116,9 +91,6 @@ body, html {
 .hero-description { animation-delay: 0.8s; }
 .hero-cta-button { 
   animation-delay: 1s; 
-  
-  /* ANIMACIÓN PULSANTE */
-
   animation-name: fadeUp, pulseGlow;
   animation-duration: 0.8s, 2.5s;
   animation-timing-function: ease-out, ease-in-out;
@@ -219,7 +191,7 @@ body, html {
 .site-footer p {
   margin: 0;
 }
-/* --- ADAPTACIÓN A DISPOSITIVOS MÓVILES (Media Queries) --- */
+/* CODIGO PARA LA ADAPTACION A DISPOSITIVO MOVIL*/
 
 @media (max-width: 768px) {
   .hero-section {
@@ -250,8 +222,7 @@ body, html {
   .page-section h2 {
     font-size: 2rem;
   }
-
-  /* --- Estilos del NAVBAR en Móvil --- */
+  /* CODIGO PARA EL NAVBAR PARA DISPOSITOVIO MOVIL*/
   .navbar {
     flex-direction: row;
     justify-content: space-between;
@@ -260,11 +231,10 @@ body, html {
   }
 
   .navbar-links {
-    /* Ocultar el menú por defecto en móvil */
     display: none; 
     flex-direction: column;
     position: absolute;
-    top: 100%; /* Justo debajo del navbar */
+    top: 100%; 
     left: 0;
     width: 100%;
     background-color: var(--brand-maroon);
@@ -273,7 +243,6 @@ body, html {
     z-index: 90;
   }
   
-  /* Mostrar el menú cuando tiene la clase 'open' */
   .navbar-links.open {
     display: flex;
   }
@@ -309,4 +278,7 @@ body, html {
   .mobile-menu {
     display: flex !important;
   }
+}
+body.restaurant-bg {
+  background-color: var(--bg-app-dark);
 }

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './restaurantview.css';
 
 // DATOS PARA PRUEBA
 const mockMenu = [
-  { id: 1, nombre: 'Tacos Al Pastor', precio: 35.50, categoria: 'Platos Fuertes' },
-  { id: 2, nombre: 'Sopa Azteca', precio: 50.00, categoria: 'Entradas' },
+  { id: 1, nombre: 'Tacos ', precio: 35.50, categoria: 'Platos Fuertes' },
+  { id: 2, nombre: 'Sopa ', precio: 50.00, categoria: 'Entradas' },
   { id: 3, nombre: 'Agua de Horchata', precio: 25.00, categoria: 'Bebidas' },
-  { id: 4, nombre: 'Flan Casero', precio: 45.00, categoria: 'Postres' },
-  { id: 5, nombre: 'Enchiladas Suizas', precio: 95.00, categoria: 'Platos Fuertes' },
+  { id: 4, nombre: 'Flan ', precio: 45.00, categoria: 'Postres' },
+  { id: 5, nombre: 'Enchiladas', precio: 95.00, categoria: 'Platos Fuertes' },
 ];
 
 const mockRestaurant = {
@@ -16,9 +16,20 @@ const mockRestaurant = {
 };
 
 function RestaurantView() {
+  
   const [cart, setCart] = useState([]);
   const [orderStatus, setOrderStatus] = useState('Pendiente');
   const [viewMode, setViewMode] = useState('menu'); 
+  
+  useEffect(() => {
+    document.body.classList.add('restaurant-bg');
+
+    return () => {
+      document.body.classList.remove('restaurant-bg');
+    };
+  }, []); 
+
+  
 
   // CODIGO DEL CARRITO Y PEDIDOS
   const addToCart = (item) => {
@@ -90,10 +101,11 @@ function RestaurantView() {
         {cart.map(item => (
           <p key={item.id}>{item.nombre} x{item.cantidad} - ${ (item.precio * item.cantidad).toFixed(2) }</p>
         ))}
-        {orderStatus === 'Pendiente' && <p>Tienes **{cart.length}** artículos en el carrito listos para ordenar.</p>}
+        {orderStatus === 'Pendiente' && cart.length > 0 && <p>Tienes {cart.length} artículos en el carrito listos para ordenar.</p>}
+        {orderStatus === 'Pendiente' && cart.length === 0 && <p>Tu carrito está vacío.</p>}
         
         <div className="consumo-total">
-          Total Pendiente: **${ calculateTotal().toFixed(2) }**
+          Total Pendiente: ${ calculateTotal().toFixed(2) }
         </div>
       </div>
       

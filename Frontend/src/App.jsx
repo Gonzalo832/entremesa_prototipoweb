@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { Routes, Route } from 'react-router-dom'; 
 import RestaurantView from './restaurantview.jsx';
+import './App.css';
 
 // CODIGO PARA DETECTAR DISPOSITIVO MOVIL
 const useIsMobile = (breakpoint = 768) => {

@@ -1,3 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(230, 197, 109, 0.3), 0 4px 15px rgba(0,0,0,0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(230, 197, 109, 0.8), 0 8px 25px rgba(230, 197, 109, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(230, 197, 109, 0.3), 0 4px 15px rgba(0,0,0,0.1);
+  }
+}
 .restaurant-view-container {
     padding: 0; 
     background-color: var(--bg-app-dark); 
@@ -101,30 +125,95 @@
 .consumo-panel {
     padding: 20px 15px;
     padding-bottom: 100px;
+    text-align: center; 
 }
 .status-box {
-    text-align: center; margin-bottom: 30px; padding: 15px; border-radius: 8px; 
-    background-color: var(--bg-card-dark); color: var(--text-light); border: 1px solid var(--brand-maroon);
+    text-align: center; 
+    margin-bottom: 30px; 
+    padding: 15px; 
+    border-radius: 8px; 
+    background-color: var(--bg-card-dark); 
+    color: var(--text-light); 
+    border: 1px solid var(--brand-maroon);
 }
-.status-box h3 { color: var(--brand-gold); }
-.status-label { padding: 5px 10px; border-radius: 5px; font-weight: 700; display: inline-block; margin-top: 10px; }
-.status-pendiente { background-color: #ffcc00; color: var(--brand-dark); }
-.status-en-proceso { background-color: #007bff; color: white; }
-.status-terminada { background-color: #28a745; color: white; }
-.cart-summary { background-color: var(--bg-card-dark); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-.cart-summary h4 { color: var(--brand-gold); border-bottom: 1px solid #444; padding-bottom: 10px; }
-.cart-summary p { color: var(--text-light); font-weight: 300; }
-.consumo-total { font-size: 1.5rem; font-weight: 700; margin-top: 20px; padding-top: 10px; border-top: 1px dashed #555; color: var(--brand-gold); }
-.payment-options { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; text-align: center; }
-.payment-btn { display: block; width: 80%; margin: 10px auto; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: background-color 0.3s ease; }
-.payment-btn.primary { background-color: var(--brand-gold); color: var(--brand-dark); border: 1px solid var(--brand-gold); }
-.payment-btn.secondary { background-color: var(--bg-app-dark); color: var(--brand-maroon); border: 1px solid var(--brand-maroon); }
+.status-box h3 { 
+    color: var(--brand-gold); 
+}
+.status-label { 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    font-weight: 700; 
+    display: inline-block; 
+    margin-top: 10px; 
+}
+.status-pendiente { 
+    background-color: #ffcc00; 
+    color: var(--brand-dark); 
+}
+.status-en-proceso { 
+    background-color: #007bff; 
+    color: white; 
+}
+.status-terminada { 
+    background-color: #28a745; 
+    color: white; 
+}
+.cart-summary { 
+    background-color: var(--bg-card-dark); 
+    padding: 15px; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+}
+.cart-summary h4 { 
+    color: var(--brand-gold); 
+    border-bottom: 1px solid #444; 
+    padding-bottom: 10px; 
+}
+.cart-summary p { 
+    color: var(--text-light); 
+    font-weight: 300; 
+}
+.consumo-total { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    margin-top: 20px; 
+    padding-top: 10px; 
+    border-top: 1px dashed #555; 
+    color: var(--brand-gold); 
+}
+.payment-options { 
+    margin-top: 30px; 
+    padding-top: 20px; 
+    border-top: 1px solid #333; 
+    text-align: center; 
+}
+.payment-btn { 
+    display: block; 
+    width: 80%; 
+    margin: 10px auto; 
+    padding: 15px; 
+    border-radius: 8px; 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+.payment-btn.primary { 
+    background-color: var(--brand-gold); 
+    color: var(--brand-dark); 
+    border: 1px solid var(--brand-gold); 
+}
+.payment-btn.secondary { 
+    background-color: var(--bg-app-dark); 
+    color: var(--brand-text); 
+    border: 1px solid var(--brand-gold); 
+}
 
 .bottom-actions {
     position: fixed;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); 
     max-width: 600px;
     width: 100%; 
     background-color: var(--bg-app-dark); 
@@ -133,15 +222,39 @@
     display: flex;
     gap: 10px;
     z-index: 50;
+    box-sizing: border-box; 
 }
-.order-btn { flex-grow: 3; background-color: var(--brand-maroon); color: white; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: 700; transition: background-color 0.3s ease; }
-.order-btn:disabled { background-color: #555; cursor: not-allowed; }
-.waiter-btn { flex-grow: 1; background-color: var(--bg-card-dark); color: var(--text-light); border: 1px solid #444; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; transition: background-color 0.3s ease; }
-
+.order-btn { 
+    flex-grow: 3; 
+    background-color: var(--brand-maroon); 
+    color: white; 
+    border: none; 
+    padding: 12px; 
+    border-radius: 8px; 
+    font-size: 1rem; 
+    font-weight: 700; 
+    transition: background-color 0.3s ease; 
+}
+.order-btn:disabled { 
+    background-color: #555; 
+    cursor: not-allowed; 
+}
+.waiter-btn { 
+    flex-grow: 1; 
+    background-color: var(--bg-card-dark); 
+    color: var(--text-light); 
+    border: 1px solid #444; 
+    padding: 12px; 
+    border-radius: 8px; 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    transition: background-color 0.3s ease; 
+}
 @media (max-width: 768px) {
   .restaurant-view-container {
       padding-top: 10px; 
   }
+
   .bottom-actions {
       width: 100%;
       max-width: none;
@@ -150,6 +263,7 @@
       right: 0;
       padding: 10px 15px;
   }
+
   .menu-list, .consumo-panel {
       padding-left: 10px;
       padding-right: 10px;
