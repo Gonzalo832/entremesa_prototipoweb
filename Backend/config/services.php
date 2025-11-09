@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    // Credenciales para Supabase usadas por el servicio personalizado
+    'supabase' => [
+        'url' => env('SUPABASE_URL'),
+        'key' => env('SUPABASE_KEY'),
+        'secret' => env('SUPABASE_SECRET'),
+    ],
+
 ];

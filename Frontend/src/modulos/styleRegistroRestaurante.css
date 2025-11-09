@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+  --brand-maroon: #6D1A1A;
+  --brand-gold: #E6C56D;
+  --brand-text: #f8f8f8; 
+  --brand-dark: #222;
+  --bg-light-cream: #fdfcf7;
+  --bg-app-dark: #1e1e1e;     
+  --bg-card-dark: #2a2a2a;    
+  --text-light: #f0f0f0;      
+  --text-dimmed: #888888;     
+}
+html {
+  scroll-behavior: smooth;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght=700&display=swap');
+
+:root {
+  --brand-maroon: #6D1A1A;
+  --brand-gold: #E6C56D;
+  --brand-text: #f8f8f8; 
+  --brand-dark: #222;
+  --bg-light-cream: #fdfcf7;
+  --bg-app-dark: #1e1e1e;     
+  --bg-card-dark: #2a2a2a;    
+  --text-light: #f0f0f0;      
+  --text-dimmed: #888888;     
+}
+html {
+  scroll-behavior: smooth;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-light-cream);
+  color: #333;
+  overflow-x: hidden; 
+}
+/* Estilo general del contenedor del formulario */
+.registrar-restaurante-form { /* Usando la clase específica del componente */
+  max-width: 650px; /* Un poco más ancho para la sección del menú */
+  margin: 2rem auto;
+  padding: 2.5rem; /* Padding aumentado */
+  background-color: #fff;
+  border-radius: 10px; /* Borde más suave */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+}
+.registrar-restaurante-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--brand-maroon);
+}
+.registrar-restaurante-form label {            
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--brand-dark);
+    }   
+.registrar-restaurante-form input, 
+.registrar-restaurante-form select {
+  width: 100%;
+  padding: 0.75rem;
+    margin-bottom: 1.5rem;  
+    border: 1px solid #ccc;
+    border-radius: 6px; 
+    font-size: 1rem;    
+    transition: border-color 0.3s;
+    }
+.registrar-restaurante-form input:focus {
+    border-color: var(--brand-gold);
+    outline: none;
+}
+.submit-btn { 
+  width: 100%;
+  padding: 0.9rem; 
+  background-color: var(--brand-maroon);
+  color: var(--brand-text);
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2rem;
+    font-weight: bold;  
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+    margin-top: 1.5rem;
+    }
+.submit-btn:hover {
+  background-color: #551515; 
+  transform: translateY(-2px);
+}
+.submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+.registrar-restaurante-form h3 {
+  text-align: left;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  color: var(--brand-maroon);
+  border-bottom: 2px solid var(--brand-gold);
+  padding-bottom: 0.5rem;
+}
+
+/* ESTILOS ESPECÍFICOS PARA EL MENÚ DINÁMICO */
+
+.menu-item-form {
+    border: 1px dashed #ddd; 
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+.menu-item-form h4 {
+    color: var(--brand-dark);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.add-item-btn {
+    width: auto; 
+    display: block;
+    margin: 1rem auto 2rem auto; 
+    padding: 0.6rem 1.5rem;
+    background-color: var(--brand-gold);
+    color: var(--brand-dark);
+    font-size: 1rem;
+    border: 1px solid var(--brand-gold);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.add-item-btn:hover {
+    background-color: var(--brand-maroon);
+    color: var(--brand-text);
+    border-color: var(--brand-maroon);
+}
+
+.remove-item-btn {
+    width: 100%;
+    background-color: #dc3545; 
+    color: white;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.remove-item-btn:hover {
+    background-color: #c82333;
+    color: white;
+    transform: none;
+}
+
+.registrar-restaurante-form button:not(.submit-btn) {
+    font-size: 1rem; 
+    font-weight: 600;
+    padding: 0.75rem;
+}
+
+/* ESTILOS EXISTENTES */
+
+.error-message {
+  color: #dc3545; 
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+.success-message {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+  background-color: var(--bg-light-cream);
+  color: #333;
+  overflow-x: hidden; 
+}
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--brand-maroon);
+}
+form label {            
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--brand-dark);
+    }   
+form input, form select {
+  width: 100%;
+  padding: 0.75rem;
+    margin-bottom: 1.5rem;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;    
+    }
+form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--brand-maroon);
+  color: var(--brand-text);
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+    font-weight: bold;  
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+form button:hover {
+  background-color: var(--brand-gold);
+  color: var(--brand-dark);
+}
+form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+form h3 {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--brand-maroon);
+}
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.success-message {
+  color: green;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem; 
+  margin-bottom: 0.5rem; 
+}
+.hero-subtitle { 
+  font-size: 1.1rem; 
+  font-weight: 300;
+  margin-bottom: 2rem; 
+}
+.hero-description { 
+  font-size: 1rem; 
+  line-height: 1.7;
+  margin-bottom: 2.5rem; 
+  font-weight: 300;
+}
+.hero-cta-button {
+  background-color: var(--brand-gold);
+  color: var(--brand-dark);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.hero-cta-button:hover {
+  background-color: var(--brand-maroon);
+  color: var(--brand-text);
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}   
+.page-section {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 3rem auto;
+  background: #ffffff;
+  color: var(--brand-dark);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  
+  opacity: 0;
+  transform: translateY(100px); 
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.page-section.is-visible {
+  opacity: 1;
+  transform: translateY(0); 
+}
+.page-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--brand-maroon);
+  margin-bottom: 1rem;
+}   
+.page-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.page-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 700px;
+}
+.page-section p:last-child {
+  margin-bottom: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.site-footer {
+  background-color: var(--brand-dark);
+  color: #aaa;
+  padding: 3rem 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.site-footer p {
+  margin: 0;
+}
+/* CODIGO PARA LA ADAPTACION A DISPOSITIVO MOVIL*/  
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .hero-logo {
+    font-size: 2.5rem; 
+  }
+  .hero-tagline {
+    font-size: 1.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .hero-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .hero-cta-button {
+    padding: 0.8rem 1.5rem; 
+  } 
+  .page-section {
+    padding: 3rem 1rem;
+    margin: 2rem 1rem; 
+  }
+  .page-section h2 {
+    font-size: 2rem; 
+  }
+  .page-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}   

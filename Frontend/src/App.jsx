@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
-import { Routes, Route } from 'react-router-dom'; 
+import { Routes, Route, Link } from 'react-router-dom'; 
 import RestaurantView from './restaurantview.jsx';
+import RegistrarRestaurante from './modulos/registrarRestaurante.jsx';
+import Login from './modulos/login.jsx';
+import RegistroExito from './modulos/RegistroExito.jsx';
+import { AuthProvider } from './context/AuthContext';
+import RestauranteDashboard from './modulos/vistaGerente/RestauranteDashboard.jsx';
 import './App.css';
 
 // CODIGO PARA DETECTAR DISPOSITIVO MOVIL
@@ -34,14 +39,16 @@ function Navbar() {
   if (isMobile) {
     return (
       <nav className="navbar mobile-navbar">
-        <a href="#inicio" className="navbar-logo">ENTREMESA</a> 
+        <Link to="/" className="navbar-logo">ENTREMESA</Link> 
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? '✕' : '☰'} 
         </button>
         <ul className={`navbar-links mobile-menu ${menuOpen ? 'open' : ''}`}>
-          <li><a href="#inicio" onClick={handleLinkClick}>Inicio</a></li>
-          <li><a href="#acerca" onClick={handleLinkClick}>Acerca de</a></li>
-          <li><a href="#restaurantes" onClick={handleLinkClick}>Restaurantes</a></li>
+          <li><Link to="/" onClick={handleLinkClick}>Inicio</Link></li>
+          <li><Link to="/acerca" onClick={handleLinkClick}>Acerca de</Link></li>
+          <li><Link to="/restaurantes" onClick={handleLinkClick}>Restaurantes</Link></li>
+          <li><Link to="/login" onClick={handleLinkClick}>Login</Link></li>
+          <li><Link to="/registrar-restaurante" onClick={handleLinkClick}>Registrar Restaurante</Link></li>
         </ul>
       </nav>
     );
@@ -49,15 +56,19 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <a href="#inicio" className="navbar-logo">ENTREMESA</a> 
+      <Link to="/" className="navbar-logo">ENTREMESA</Link> 
       <ul className="navbar-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#acerca">Acerca de</a></li>
-        <li><a href="#restaurantes">Restaurantes</a></li>
+        <li><Link to="/">Inicio</Link></li>
+        <li><Link to="/acerca">Acerca de</Link></li>
+        <li><Link to="/restaurantes">Restaurantes</Link></li>
+        <li><Link to="/login"> Login</Link></li>
+        <li><Link to="/registrar-restaurante">Registrar Restaurante</Link></li>
+
       </ul>
     </nav>
   );
 }
+
 
 // CODIGO INDEX O EL INICIO DE LA OPAGINA ENTREMESA 
 function Home() {
@@ -213,23 +224,26 @@ function Footer() {
 // COMPONENTE PRINCIPAL App
 function App() {
   return (
-    <div className="app-container">
-      <Routes>
-        <Route path="/" element={
-          <>
-            <Navbar />
+    <AuthProvider>
+      <div className="app-container">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
             <main>
-                <Home />
-                <Acerca />
-                <Restaurantes />
+              <Home />
+              <Acerca />
+              <Restaurantes />
             </main>
-            <Footer />
-          </>
-        } />
-        
-        <Route path="/mesa/:idMesa" element={<RestaurantView />} /> 
-      </Routes>
-    </div>
+          } />
+          <Route path="/registrar-restaurante" element={<RegistrarRestaurante />} />
+          <Route path="/registro-exito" element={<RegistroExito />} />
+          <Route path="/mesa/:idMesa" element={<RestaurantView />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/restaurante/:id/dashboard" element={<RestauranteDashboard />} />
+        </Routes>
+        <Footer />
+      </div>
+    </AuthProvider>
   );
 }
 
