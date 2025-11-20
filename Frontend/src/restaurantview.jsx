@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './restaurantview.css';
 
-// DATOS PARA PRUEBA
-const mockMenu = [
-  { id: 1, nombre: 'Tacos ', precio: 35.50, categoria: 'Platos Fuertes' },
-  { id: 2, nombre: 'Sopa ', precio: 50.00, categoria: 'Entradas' },
-  { id: 3, nombre: 'Agua de Horchata', precio: 25.00, categoria: 'Bebidas' },
-  { id: 4, nombre: 'Flan ', precio: 45.00, categoria: 'Postres' },
-  { id: 5, nombre: 'Enchiladas', precio: 95.00, categoria: 'Platos Fuertes' },
-];
-
-const mockRestaurant = {
-  nombre: "El Buen Sazón",
-  mesa: "Mesa 5",
-};
 
 function RestaurantView() {
   

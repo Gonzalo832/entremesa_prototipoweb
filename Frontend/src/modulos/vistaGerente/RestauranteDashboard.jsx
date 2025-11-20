@@ -2,6 +2,8 @@ import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useParams } from 'react-router-dom';
 import './RestauranteDashboard.css';
+import MeseroForm from './MeseroForm.jsx';
+import CocineroForm from './CocineroForm.jsx';
 
 function RestauranteDashboard() {
     const { user } = useAuth();
@@ -10,6 +12,9 @@ function RestauranteDashboard() {
     if (!user || user.restaurante.id !== parseInt(id)) {
         return <div>No autorizado</div>;
     }
+
+    const [showMeseroForm, setShowMeseroForm] = React.useState(false);
+    const [showCocineroForm, setShowCocineroForm] = React.useState(false);
 
     return (
         <div className="dashboard-container">
@@ -22,7 +27,16 @@ function RestauranteDashboard() {
                 <button className="dashboard-button">Gestionar Menú</button>
                 <button className="dashboard-button">Ver Mesas</button>
                 <button className="dashboard-button">Estadísticas</button>
+                <button className="dashboard-button" onClick={() => setShowMeseroForm(true)}>Agregar Mesero</button>
+                <button className="dashboard-button" onClick={() => setShowCocineroForm(true)}>Agregar Cocinero</button>
             </div>
+
+            {showMeseroForm && (
+                <MeseroForm restauranteId={user.restaurante.id} onClose={() => setShowMeseroForm(false)} />
+            )}
+            {showCocineroForm && (
+                <CocineroForm restauranteId={user.restaurante.id} onClose={() => setShowCocineroForm(false)} />
+            )}
         </div>
     );
 }

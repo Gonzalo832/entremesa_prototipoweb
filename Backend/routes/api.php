@@ -22,4 +22,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('api')->group(function () {
     Route::post('/restaurantes', [RestauranteController::class, 'registrar']);
     Route::get('/restaurantes', [RestauranteController::class, 'listar']);
+    Route::post('/mesero', [App\Http\Controllers\UserManagementController::class, 'registrarMesero']);
+    Route::get('/mesero/{id}', [App\Http\Controllers\UserManagementController::class, 'getMesero']);
+    Route::get('/cocinero/{id}', [App\Http\Controllers\UserManagementController::class, 'getCocinero']);
+    Route::post('/cocinero', [App\Http\Controllers\UserManagementController::class, 'registrarCocinero']);
 });

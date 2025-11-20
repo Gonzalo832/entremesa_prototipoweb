@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { Routes, Route, Link } from 'react-router-dom'; 
 import RestaurantView from './restaurantview.jsx';
-import RegistrarRestaurante from './modulos/registrarRestaurante.jsx';
-import Login from './modulos/login.jsx';
+import RegistrarRestaurante from './modulos/formularios/registrarRestaurante.jsx';
+import Login from './modulos/formularios/login.jsx';
 import RegistroExito from './modulos/RegistroExito.jsx';
 import { AuthProvider } from './context/AuthContext';
 import RestauranteDashboard from './modulos/vistaGerente/RestauranteDashboard.jsx';
+import MeseroView from './modulos/Vista mesero/vista_mesero.jsx';
+import CocinaView from './modulos/vista cocinero/vista_cocina.jsx';
 import './App.css';
 
 // CODIGO PARA DETECTAR DISPOSITIVO MOVIL
@@ -59,10 +61,8 @@ function Navbar() {
       <Link to="/" className="navbar-logo">ENTREMESA</Link> 
       <ul className="navbar-links">
         <li><Link to="/">Inicio</Link></li>
-        <li><Link to="/acerca">Acerca de</Link></li>
-        <li><Link to="/restaurantes">Restaurantes</Link></li>
-        <li><Link to="/login"> Login</Link></li>
-        <li><Link to="/registrar-restaurante">Registrar Restaurante</Link></li>
+        <li><Link to="/login"> Acceder</Link></li>
+        <li><Link to="/registrar-restaurante">Registro de Restaurante</Link></li>
 
       </ul>
     </nav>
@@ -240,6 +240,8 @@ function App() {
           <Route path="/mesa/:idMesa" element={<RestaurantView />} />
           <Route path="/login" element={<Login />} />
           <Route path="/restaurante/:id/dashboard" element={<RestauranteDashboard />} />
+          <Route path="/mesero/:id/dashboard" element={<MeseroView />} />
+          <Route path="/cocinero/:id/dashboard" element={<CocinaView />} />
         </Routes>
         <Footer />
       </div>

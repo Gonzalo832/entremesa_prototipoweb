@@ -46,6 +46,14 @@ class AuthController extends Controller
                 ['correo_electronico' => $request->correo_electronico]
             );
 
+
+            //  codigo para buscar en la tabla de Cocineros
+            $cocineroResponse = $this->supabase->select(
+                'cocinero',
+                'id_cocinero, nombre, correo_electronico, password, id_restaurante',
+                ['correo_electronico' => $request->correo_electronico]
+            );
+
             //  codigo para buscar en la tabla de Administradores
             $adminResponse = $this->supabase->select(
                 'administrador_app',
@@ -58,6 +66,7 @@ class AuthController extends Controller
             
             $gerenteData = json_decode($gerenteResponse->body(), true);
             $meseroData = json_decode($meseroResponse->body(), true);
+            $cocineroData = json_decode($cocineroResponse->body(), true);
             $adminData = json_decode($adminResponse->body(), true);
 
             if (!empty($gerenteData)) {
@@ -66,6 +75,9 @@ class AuthController extends Controller
             } elseif (!empty($meseroData)) {
                 $usuario = $meseroData[0];
                 $tipo = 'mesero';
+            } elseif (!empty($cocineroData)) {
+                $usuario = $cocineroData[0];
+                $tipo = 'cocina';
             } elseif (!empty($adminData)) {
                 $usuario = $adminData[0];
                 $tipo = 'admin';
@@ -92,6 +104,7 @@ class AuthController extends Controller
             $token = Str::random(60);
             $userData = [];
 
+
             switch ($tipo) {
                 case 'gerente':
                     $this->supabase->update('gerentes', $usuario['id_gerente'], ['remember_token' => $token]);
@@ -116,7 +129,6 @@ class AuthController extends Controller
 
                 case 'mesero':
                     $this->supabase->update('mesero', $usuario['id_mesero'], ['remember_token' => $token]);
-                    // Obtener información del restaurante
                     $restauranteResponse = $this->supabase->select(
                         'restaurantes',
                         'nombre, ubicacion',
@@ -126,6 +138,27 @@ class AuthController extends Controller
                     $userData = [
                         'id' => $usuario['id_mesero'],
                         'tipo' => 'mesero',
+                        'nombre' => $usuario['nombre'],
+                        'correo' => $usuario['correo_electronico'],
+                        'restaurante' => [
+                            'id' => $usuario['id_restaurante'],
+                            'nombre' => $restaurante['nombre'],
+                            'ubicacion' => $restaurante['ubicacion']
+                        ]
+                    ];
+                    break;
+
+                case 'cocina':
+                    $this->supabase->update('cocinero', $usuario['id_cocinero'], ['remember_token' => $token]);
+                    $restauranteResponse = $this->supabase->select(
+                        'restaurantes',
+                        'nombre, ubicacion',
+                        ['id_restaurante' => 'eq.' . $usuario['id_restaurante']]
+                    );
+                    $restaurante = $restauranteResponse->json()[0];
+                    $userData = [
+                        'id' => $usuario['id_cocinero'],
+                        'tipo' => 'cocina',
                         'nombre' => $usuario['nombre'],
                         'correo' => $usuario['correo_electronico'],
                         'restaurante' => [

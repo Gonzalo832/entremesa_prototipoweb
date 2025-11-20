@@ -1,0 +1,881 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales */
+    --color-maroon: #722F37;        
+    --color-maroon-dark: #5A2329;   
+    --color-maroon-light: #8B4A52;  
+    --color-golden: #FFD700;       
+    --color-golden-dark: #DAA520;   
+    --color-golden-light: #FFE55C;  
+    --color-white: #FFFFFF;         
+    --color-black: #000000;         
+    --color-text: #000000;          
+    --color-text-light: #333333;     
+    --color-text-grey: #666666;      
+    
+    /* Colores funcionales */
+    --color-success: #4CAF50;
+    --color-warning: #FF9800;
+    --color-danger: #F44336;
+    --color-info: #2196F3;
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.15);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.2);
+    --shadow-lg: 0 10px 20px rgba(0,0,0,0.3);
+    --shadow-golden: 0 4px 15px rgba(255, 215, 0, 0.3);
+    
+    /* Bordes */
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 20px;
+    
+    /* Transiciones */
+    --transition: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
+}
+
+body {
+    font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--color-maroon);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    background: var(--color-maroon);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--border-radius);
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: rgba(44, 44, 44, 0.3);
+    background-image: radial-gradient(circle, rgba(31, 31, 31, 0.5) 2px, transparent 2px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.header-left,
+.header-right {
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-golden);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.logo i {
+    font-size: 32px;
+    color: var(--color-golden);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: var(--color-white);
+}
+
+.user-info > div:last-child {
+    color: var(--color-white);
+}
+
+.user-info > div:last-child > div:first-child {
+    color: var(--color-white);
+}
+
+.user-info > div:last-child > div:last-child {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-golden);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-maroon);
+    font-weight: 700;
+    box-shadow: var(--shadow-golden);
+}
+
+/* ============================================
+   STATS CARDS
+   ============================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--color-white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border-left: 4px solid var(--color-golden);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--color-golden) 0%, transparent 100%);
+    opacity: 0.1;
+    border-radius: 50%;
+    transform: translate(30px, -30px);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-left-color: var(--color-maroon);
+}
+
+.stat-card.success {
+    border-left-color: var(--color-success);
+}
+
+.stat-card.warning {
+    border-left-color: var(--color-warning);
+}
+
+.stat-card.danger {
+    border-left-color: var(--color-danger);
+}
+
+.stat-card.info {
+    border-left-color: var(--color-info);
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.stat-title {
+    font-size: 14px;
+    color: var(--color-text-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-card.success .stat-icon {
+    background: var(--color-success);
+}
+
+.stat-card.warning .stat-icon {
+    background: var(--color-warning);
+}
+
+.stat-card.danger .stat-icon {
+    background: var(--color-danger);
+}
+
+.stat-card.info .stat-icon {
+    background: var(--color-info);
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-text);
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ============================================
+   CONTENT GRID
+   ============================================ */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid rgba(114, 47, 55, 0.1);
+}
+
+.card-full {
+    grid-column: 1 / -1;
+}
+
+.card-header {
+    background: var(--color-maroon);
+    color: var(--color-golden);
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 2px solid var(--color-golden);
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-golden);
+    opacity: 0.5;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-golden);
+}
+
+.card-title i {
+    color: var(--color-golden);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.card-header span {
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--color-golden);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.card-body {
+    padding: 25px;
+    background: var(--color-white);
+    color: var(--color-text);
+}
+
+/* ============================================
+   CATEGORÍAS
+   ============================================ */
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.categoria-item {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+    border: 2px solid rgba(114, 47, 55, 0.2);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.categoria-item:hover {
+    border-color: var(--color-golden);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-3px);
+}
+
+.categoria-nombre {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.categoria-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.categoria-stats span {
+    font-size: 14px;
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.categoria-stats i {
+    color: var(--color-maroon);
+}
+
+/* ============================================
+   PEDIDOS COCINA
+   ============================================ */
+.pedido-cocina-item {
+    background: var(--color-white);
+    border: 2px solid rgba(114, 47, 55, 0.2);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: var(--transition);
+    border-left: 5px solid var(--color-golden);
+}
+
+.pedido-cocina-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.pedido-cocina-item[data-estado="pendiente"] {
+    border-left-color: var(--color-danger);
+}
+
+.pedido-cocina-item[data-estado="en-preparación"] {
+    border-left-color: var(--color-warning);
+}
+
+.pedido-cocina-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(114, 47, 55, 0.1);
+}
+
+.pedido-cocina-info {
+    flex: 1;
+}
+
+.pedido-numero {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--color-text);
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.pedido-numero i {
+    color: var(--color-golden);
+    margin-right: 8px;
+}
+
+.pedido-mesa-cliente {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--color-text-light);
+}
+
+.pedido-mesa-cliente span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pedido-mesa-cliente i {
+    color: var(--color-maroon);
+}
+
+.pedido-cocina-acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.tiempo-espera {
+    background: var(--color-maroon);
+    color: var(--color-white);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.estado-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.estado-pendiente {
+    background: #F8D7DA;
+    color: #721C24;
+    border: 1px solid #F5C6CB;
+}
+
+.estado-en-preparación {
+    background: #FFF3CD;
+    color: #856404;
+    border: 1px solid #FFE69C;
+}
+
+/* ============================================
+   DETALLES DE PEDIDO
+   ============================================ */
+.pedido-detalles {
+    margin-bottom: 20px;
+}
+
+.categoria-detalle {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-golden);
+}
+
+.categoria-detalle-header {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-text);
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.categoria-detalle-header i {
+    color: var(--color-golden);
+}
+
+.platillo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 12px;
+    background: var(--color-white);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 10px;
+    border: 1px solid rgba(114, 47, 55, 0.1);
+}
+
+.platillo-info {
+    flex: 1;
+}
+
+.platillo-nombre-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.platillo-cantidad {
+    background: var(--color-maroon);
+    color: var(--color-white);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.platillo-nombre {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-text);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.platillo-comentarios {
+    font-size: 13px;
+    color: var(--color-text-light);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.platillo-comentarios i {
+    color: var(--color-golden);
+}
+
+.platillo-precio {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-text);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pedido-total-cocina {
+    text-align: right;
+    padding: 15px;
+    background: rgba(114, 47, 55, 0.1);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-text);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pedido-total-cocina::before {
+    content: 'Total: ';
+    font-size: 16px;
+    color: var(--color-text-light);
+}
+
+/* ============================================
+   BOTONES COCINA
+   ============================================ */
+.pedido-botones {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-cocina {
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-iniciar {
+    background: var(--color-warning);
+    color: var(--color-white);
+    border-color: var(--color-warning);
+}
+
+.btn-iniciar:hover {
+    background: #FF8C00;
+    border-color: #FF8C00;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-completar {
+    background: var(--color-success);
+    color: var(--color-white);
+    border-color: var(--color-success);
+}
+
+.btn-completar:hover {
+    background: #45a049;
+    border-color: #45a049;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-cocina:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   PLATILLOS RESUMEN
+   ============================================ */
+.platillos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.platillo-resumen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-golden);
+    transition: var(--transition);
+}
+
+.platillo-resumen:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.platillo-resumen-info {
+    flex: 1;
+}
+
+.platillo-resumen-nombre {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-text);
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.platillo-resumen-categoria {
+    font-size: 13px;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.platillo-resumen-cantidades {
+    display: flex;
+    gap: 15px;
+}
+
+.cantidad-badge,
+.pedidos-badge {
+    background: var(--color-white);
+    border: 2px solid var(--color-maroon);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cantidad-badge i,
+.pedidos-badge i {
+    color: var(--color-golden);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--color-text-light);
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: rgba(114, 47, 55, 0.2);
+    margin-bottom: 20px;
+}
+
+.empty-state p {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-light);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header::before {
+        width: 100%;
+        opacity: 0.2;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .categorias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .pedido-cocina-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pedido-cocina-acciones {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .pedido-botones {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-cocina {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .platillo-resumen {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .platillo-resumen-cantidades {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 15px 20px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-golden {
+    color: var(--color-golden);
+}
+
+.text-maroon {
+    color: var(--color-maroon);
+}
+
+.bg-maroon {
+    background: var(--color-maroon);
+}
+
+.bg-golden {
+    background: var(--color-golden);
+}
+
