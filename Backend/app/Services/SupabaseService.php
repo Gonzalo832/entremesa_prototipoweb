@@ -119,16 +119,17 @@ class SupabaseService
     }
     
     /**
-     * Ejecuta la inserción del restaurante, gerente, menú, y la primera Mesa/QR.
+     * Ejecuta la inserción del restaurante, gerente, menú, y las mesas con QR.
      * @param array $restauranteData Datos del restaurante (nombre, ubicacion)
      * @param array $gerenteData Datos del gerente (nombre, correo, password)
      * @param array $menuItems Lista de platillos del menú
+     * @param int $numMesas Número de mesas a crear
      * @return array
      * @throws \Exception
      */
-    public function registerFullRestaurant(array $restauranteData, array $gerenteData, array $menuItems): array
+    public function registerFullRestaurant(array $restauranteData, array $gerenteData, array $menuItems, int $numMesas = 1): array
     {
-        // 1. GENERAR CÓDIGO QR ÚNICO
+        // 1. GENERAR CÓDIGO QR ÚNICO PARA LA PRIMERA MESA
         $qrCode = $this->generateUniqueQrCode();
         $menuUrl = $this->getMenuUrl($qrCode);
         
@@ -153,18 +154,26 @@ class SupabaseService
             throw new \Exception("Error al insertar Gerente: " . $gerenteResponse->body());
         }
 
-        // Codigo para insertar la primera Mesa con el código QR único 
-        $mesaData = [
-            'id_restaurante' => $id_restaurante,
-            'numero_mesa' => '001', 
-            'codigo_qr' => $qrCode, // Código único para el QR
-            'capacidad' => 4,
-            'estado' => 'Disponible'
-        ];
-    $mesaResponse = $this->insert('mesa', $mesaData);
+        // Codigo para insertar múltiples Mesas con códigos QR únicos
+        $mesasInserts = [];
+        for ($i = 1; $i <= $numMesas; $i++) {
+            $mesaQrCode = $this->generateUniqueQrCode();
+            $mesasInserts[] = [
+                'id_restaurante' => $id_restaurante,
+                'numero_mesa' => str_pad($i, 3, '0', STR_PAD_LEFT), // 001, 002, 003, etc.
+                'codigo_qr' => $mesaQrCode,
+                'capacidad' => 4,
+                'estado' => 'Disponible'
+            ];
+        }
 
-        if ($mesaResponse->failed()) {
-            throw new \Exception("Error al insertar Mesa/QR: " . $mesaResponse->body());
+        if (!empty($mesasInserts)) {
+            $mesaResponse = $this->insert('mesa', $mesasInserts);
+
+            if ($mesaResponse->failed()) {
+                \Log::error('Error al insertar Mesas: ' . $mesaResponse->body());
+                throw new \Exception("Error al insertar Mesas: " . $mesaResponse->body());
+            }
         }
 
         // Codigo para insertar los platillos del Menú (Inserción Múltiple)
@@ -173,6 +182,7 @@ class SupabaseService
             $menuInserts[] = [
                 'id_restaurante' => $id_restaurante,
                 'nombre' => $item['nombre'],
+                'descripcion' => $item['descripcion'] ?? null,
                 'precio' => (float)$item['precio'],
                 'categoria' => $item['categoria']
             ];
@@ -181,16 +191,20 @@ class SupabaseService
             $menuResponse = $this->insert('menu', $menuInserts);
 
             if ($menuResponse->failed()) {
+                \Log::error('Error al insertar menú: ' . $menuResponse->body());
                 throw new \Exception("Error al insertar Menú: " . $menuResponse->body());
             }
         }
 
-        // Generar la imagen del QR
+        // Generar la imagen del QR de la primera mesa
+        $primerMesaQrCode = $mesasInserts[0]['codigo_qr'];
+        $primerMesaUrl = $this->getMenuUrl($primerMesaQrCode);
+        
         $qrImage = QrCode::format('png')
             ->size(300)
             ->margin(1)
             ->errorCorrection('H')
-            ->generate($menuUrl);
+            ->generate($primerMesaUrl);
         
         // Convertir la imagen a base64
         $qrImageBase64 = 'data:image/png;base64,' . base64_encode($qrImage);
@@ -198,8 +212,9 @@ class SupabaseService
         // Retorno del resultado 
         return [
             'id_restaurante' => $id_restaurante,
-            'qr_code_url' => $menuUrl,
-            'qr_code_key' => $qrCode,
+            'num_mesas_creadas' => count($mesasInserts),
+            'qr_code_url' => $primerMesaUrl,
+            'qr_code_key' => $primerMesaQrCode,
             'qr_image' => $qrImageBase64
         ];
     }

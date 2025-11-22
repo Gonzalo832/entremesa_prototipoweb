@@ -12,9 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->use([
-             \Illuminate\Http\Middleware\HandleCors::class
-        ]);
+        // CORS manejado manualmente en los controladores
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

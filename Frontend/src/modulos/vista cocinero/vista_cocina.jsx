@@ -129,7 +129,7 @@ const PedidoCocinaItem = ({ pedido, onAction }) => {
 const CocinaView = () => {
     const { user } = useAuth();
     const { id } = useParams();
-    const API_URL = `http://entremesa-backend.test/api/cocinero/${id}`;
+    const API_URL = `http://172.20.10.2:8000/api/cocinero/${id}`;
     const [data, setData] = useState({ pedidos: [], categorias: [], platillos: [] });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

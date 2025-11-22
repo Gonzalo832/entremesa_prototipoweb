@@ -39,7 +39,7 @@ const StatCard = ({ title, value, icon, type }) => (
 const MeseroView = () => {
     const { user } = useAuth();
     const { id } = useParams(); 
-    const API_URL = 'http://entremesa-backend.test/api/mesero/' + id;
+    const API_URL = 'http://172.20.10.2:8000/api/mesero/' + id;
     const [data, setData] = useState({ 
         id_mesero: 0,
         solicitudes: [], 

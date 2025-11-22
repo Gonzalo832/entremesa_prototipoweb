@@ -25,7 +25,7 @@ function Login() {
         setError('');
 
         try {
-            const response = await fetch('http://entremesa-backend.test/api/login', {
+            const response = await fetch('http://172.20.10.2:8000/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,10 +48,8 @@ function Login() {
 
             if (response.ok) {
                 localStorage.setItem('token', data.token);
-                // codigo para guardar los datos del usuario en el contexto
                 authLogin(data.user);
                 
-                // Redirigir según el tipo de usuario
                 switch (data.user.tipo) {
                     case 'gerente':
                         navigate(`/restaurante/${data.user.restaurante.id}/dashboard`);

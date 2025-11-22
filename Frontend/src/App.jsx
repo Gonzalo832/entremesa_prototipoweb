@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
-import { Routes, Route, Link } from 'react-router-dom'; 
+import { Routes, Route, Link, useLocation } from 'react-router-dom'; 
 import RestaurantView from './restaurantview.jsx';
 import RegistrarRestaurante from './modulos/formularios/registrarRestaurante.jsx';
 import Login from './modulos/formularios/login.jsx';
 import RegistroExito from './modulos/RegistroExito.jsx';
 import { AuthProvider } from './context/AuthContext';
-import RestauranteDashboard from './modulos/vistaGerente/RestauranteDashboard.jsx';
+import GerenteDashboard from './modulos/vistaGerente/GerenteDashboard.jsx';
 import MeseroView from './modulos/Vista mesero/vista_mesero.jsx';
 import CocinaView from './modulos/vista cocinero/vista_cocina.jsx';
+import MenuComensal from './modulos/comensal/MenuComensal.jsx';
 import './App.css';
 
 // CODIGO PARA DETECTAR DISPOSITIVO MOVIL
@@ -30,7 +31,14 @@ const useIsMobile = (breakpoint = 768) => {
 // CODIGO PARA EL NAVBAR
 function Navbar() {
   const isMobile = useIsMobile(); 
-  const [menuOpen, setMenuOpen] = useState(false); 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Ocultar navbar en dashboards
+  const hiddenPaths = ['/restaurante/', '/mesero-dashboard', '/cocina-dashboard'];
+  if (hiddenPaths.some(path => location.pathname.includes(path))) {
+    return null;
+  } 
 
   const handleLinkClick = () => {
     if (isMobile) {
@@ -237,9 +245,10 @@ function App() {
           } />
           <Route path="/registrar-restaurante" element={<RegistrarRestaurante />} />
           <Route path="/registro-exito" element={<RegistroExito />} />
+          <Route path="/menu/:codigo_qr" element={<MenuComensal />} />
           <Route path="/mesa/:idMesa" element={<RestaurantView />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/restaurante/:id/dashboard" element={<RestauranteDashboard />} />
+          <Route path="/restaurante/:id/dashboard" element={<GerenteDashboard />} />
           <Route path="/mesero/:id/dashboard" element={<MeseroView />} />
           <Route path="/cocinero/:id/dashboard" element={<CocinaView />} />
         </Routes>

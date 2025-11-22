@@ -113,4 +113,56 @@ class UserManagementController extends Controller
             'message' => 'Cocinero registrado correctamente'
         ], 201);
     }
+
+    public function deleteMesero($id)
+    {
+        try {
+            $mesero = DB::table('mesero')->where('id_mesero', $id)->first();
+            if (!$mesero) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Mesero no encontrado'
+                ], 404);
+            }
+
+            DB::table('mesero')->where('id_mesero', $id)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Mesero eliminado correctamente'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al eliminar mesero',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deleteCocinero($id)
+    {
+        try {
+            $cocinero = DB::table('cocinero')->where('id_cocinero', $id)->first();
+            if (!$cocinero) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cocinero no encontrado'
+                ], 404);
+            }
+
+            DB::table('cocinero')->where('id_cocinero', $id)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cocinero eliminado correctamente'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al eliminar cocinero',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

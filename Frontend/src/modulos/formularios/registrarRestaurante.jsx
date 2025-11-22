@@ -84,7 +84,6 @@ function RegistrarRestaurante() {
         return;
     }
     
-    // Validación de número de mesas
     if (formData.restaurante.num_mesas < 1) {
         setError("El número de mesas debe ser al menos 1.");
         setLoading(false);
@@ -92,7 +91,6 @@ function RegistrarRestaurante() {
     }
 
     try {
-      //Codigo para hacer la Petición al Backend
       const requestBody = {
           nombre: formData.restaurante.nombre,
           ubicacion: formData.restaurante.ubicacion,
@@ -105,9 +103,8 @@ function RegistrarRestaurante() {
           menu: validMenuItems 
       };
 
-      const response = await fetch('http://entremesa-backend.test/api/restaurantes', {
+      const response = await fetch('http://172.20.10.2:8000/api/restaurantes', {
         method: 'POST',
-        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
         },

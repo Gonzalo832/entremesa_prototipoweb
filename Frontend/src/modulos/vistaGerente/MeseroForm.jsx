@@ -18,7 +18,7 @@ function MeseroForm({ restauranteId, onClose }) {
         setError('');
         setSuccess('');
         try {
-            const res = await fetch('http://entremesa-backend.test/api/mesero', {
+            const res = await fetch('http://172.20.10.2:8000/api/mesero', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ...form, id_restaurante: restauranteId })
